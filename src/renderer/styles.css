@@ -9,6 +9,7 @@
   --accent: #5b8cff;
   --accent-strong: #7aa2ff;
   --danger: #ff6b6b;
+  --titlebar-height: 44px;
   --radius: 10px;
   --radius-lg: 16px;
 }
@@ -23,6 +24,8 @@ body {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   background: var(--bg);
   color: var(--text);
@@ -48,28 +51,72 @@ button:disabled {
   opacity: 0.45;
 }
 
+/* Titlebar
+   ------------------------------------------------------------------ */
+
+/* The OS paints the Window Controls Overlay as a solid block exactly
+   `--titlebar-height` tall, which would clip a border drawn inside it.
+   So the content fills that height and the divider sits in the row below. */
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+  height: calc(var(--titlebar-height) + 1px);
+  padding: 0 16px 0 20px;
+  padding-right: calc(100% - env(titlebar-area-width, 100%) + 14px);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+html[data-platform='darwin'] .titlebar {
+  padding-left: 80px;
+}
+
+.titlebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+}
+
+.titlebar__mark {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--accent);
+}
+
+.titlebar__title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.titlebar__status {
+  margin: 0 0 0 auto;
+  color: var(--text-muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* App shell
+   ------------------------------------------------------------------ */
+
 .app {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  flex: 1;
+  min-height: 0;
   width: 100%;
   max-width: 560px;
-  min-height: 100%;
   margin: 0 auto;
-  padding: 32px 24px 24px;
-}
-
-.app__title {
-  margin: 0;
-  font-size: 26px;
-  font-weight: 650;
-  letter-spacing: -0.02em;
-}
-
-.app__subtitle {
-  margin: 4px 0 0;
-  color: var(--text-muted);
-  font-size: 13px;
+  padding: 24px 24px 20px;
+  overflow-y: auto;
 }
 
 /* Composer

@@ -10,12 +10,25 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="app">
-      <header class="app__header">
-        <h1 class="app__title">Todo</h1>
-        <p class="app__subtitle" id="summary">Nothing yet</p>
-      </header>
+    <div class="titlebar">
+      <div class="titlebar__brand">
+        <svg class="titlebar__mark" viewBox="0 0 20 20" aria-hidden="true">
+          <rect width="20" height="20" rx="6" fill="currentColor" opacity="0.18" />
+          <path
+            d="M5.8 10.3l2.7 2.7 5.7-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.9"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <h1 class="titlebar__title">Todo</h1>
+      </div>
+      <p class="titlebar__status" id="summary">Nothing yet</p>
+    </div>
 
+    <main class="app">
       <form class="composer" id="composer" autocomplete="off">
         <input
           class="composer__input"

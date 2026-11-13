@@ -3,6 +3,11 @@ const { app, BrowserWindow } = require('electron');
 const { openDatabase, closeDatabase } = require('./database');
 const { registerTodoHandlers } = require('./ipc');
 
+const isMac = process.platform === 'darwin';
+
+// Must match --titlebar-height in styles.css.
+const TITLEBAR_HEIGHT = 44;
+
 const WINDOW_DEFAULTS = {
   width: 560,
   height: 720,
@@ -11,6 +16,19 @@ const WINDOW_DEFAULTS = {
   backgroundColor: '#111318',
   autoHideMenuBar: true,
   title: 'Todo',
+  ...(isMac
+    ? {
+        titleBarStyle: 'hiddenInset',
+        trafficLightPosition: { x: 16, y: 15 },
+      }
+    : {
+        titleBarStyle: 'hidden',
+        titleBarOverlay: {
+          color: '#111318',
+          symbolColor: '#8b93a3',
+          height: TITLEBAR_HEIGHT,
+        },
+      }),
 };
 
 function createWindow() {

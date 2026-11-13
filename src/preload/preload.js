@@ -1,6 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('api', {
+  platform: process.platform,
   todos: {
     list: () => ipcRenderer.invoke('todos:list'),
     create: (title) => ipcRenderer.invoke('todos:create', title),

@@ -1,3 +1,5 @@
+document.documentElement.dataset.platform = window.api.platform;
+
 const state = {
   todos: [],
   filter: 'all',
